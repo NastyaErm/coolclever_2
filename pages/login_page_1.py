@@ -82,7 +82,7 @@ class Login_page(Base):
             print("Вход не произведен")
 
 
-    # pickle.dump(driver.get_cookies(), open("cookies_01.pkl", "wb"))
+    # pickle.dump(drivers.get_cookies(), open("cookies_01.pkl", "wb"))
     # print("куки сохранены")
     # time.sleep(5)
 

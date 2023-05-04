@@ -82,13 +82,5 @@ class Catalog_page(Base):
         self.get_current_url()
         self.button_catalog_click()
         self.assert_url_myasnov("https://www.coolclever.ru/catalog/myasnov")
-        #self.otdohni_btn_click()
-        #self.assert_url_otdohni("https://www.coolclever.ru/catalog/otdokhni")
         self.sections_page_find_1()
         self.sections_page_images_find_1()
-
-
-
-
-
-

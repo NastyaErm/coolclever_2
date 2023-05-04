@@ -21,9 +21,7 @@ class Basket_page(Base):
     basket_btn = "//div[@class='HeaderToolBar_basket__EvY2T']" #кнопка корзины
     empty_basket_text = "//p[contains(text(),'В вашей корзине пока пусто')]"
     clear_basket_btn = "//span[contains(text(),'Очистить корзину')]"
-   # go_to_catalog_btn = ".BasketEmptyView_buttonWrapper__uZe3m .Button_contentWrapper__q5j3d" #перейти в каталог
-    #go_to_catalog_btn = "//span[contains(text(),'Перейти в каталог')]"
-    go_to_catalog_btn = "#__next > div > main > div > div > div > div > div.BasketEmptyView_buttonWrapper__uZe3m > button"
+    go_to_catalog_btn = "#__next > main > div > div > div > div.BasketEmptyView_buttonWrapper__uZe3m > a > div"
 
     #Getters
 
@@ -73,7 +71,6 @@ class Basket_page(Base):
     def empty_basket(self):
         self.get_current_url()
         self.button_basket_click()
-        #self.empty_basket_text_check()
         self.assert_url_basket("https://www.coolclever.ru/basket")
         self.clear_basket()
 

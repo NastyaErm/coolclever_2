@@ -8,8 +8,6 @@ from base.base_class import Base
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
-
-
 class Items_page(Base):
     driver = webdriver.Chrome()
 
@@ -25,15 +23,11 @@ class Items_page(Base):
     filter_cheap_btn = ".swiper-slide.swiper-slide-next .SortTabs_tab__iI5DN" #сначала недорогие
     filter_expensive_btn = ".SortTabs_sortWrapper__EdOEN div:nth-child(3)" #сначала дорогие
     filter_hits_btn = ".SortTabs_sortWrapper__EdOEN div:nth-child(5)" #хиты
-    close_modal_btn = ".FreeDeliveryBanner_buttons__Af1VW button:nth-child(2)"
+    close_modal_btn = ".GiftBanner_controls__wk_NU button:nth-child(2)"
     filter_all_btn = "//span[contains(text(),'Все фильтры')]"
     filter_all_modal_window = "//div[@class='ModalFilter_formWarpper__aYwiJ']"
     filter_no_sugar_btn = "//label[@for='87442']" #фильтр без сахара
-    #filter_ccal_slider = "#prices .rc-slider.rc-slider-horizontal .rc-slider-handle.rc-slider-handle-2"
-    #filter_ccal_slider = "//*[@id='prices']/div/div/div[2]/div[5]"
-    #filter_ccal_slider = driver.find_element(By.XPATH, "//*[@id='prices']/div/div/div[2]/div[5]")
-    #all = "//div[@class='CatalogPage_productList__BC7TO']"
-
+    filter_show_items = "/html/body/div[4]/div/div[2]/div[3]/button[1]" #показать отфильтрованные товары
 
     #Getters
 
@@ -65,32 +59,22 @@ class Items_page(Base):
         return WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, self.filter_all_btn)))
 
-    # def slider_ccal_find(self):
-    #     return WebDriverWait(self.driver, 10).until(
-    #         EC.element_to_be_clickable((By.XPATH, self.filter_ccal_slider)))
+    def filter_no_sugar(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, self.filter_no_sugar_btn)))
+
+    def filter_show(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, self.filter_show_items)))
 
 
-    # def filter_no_sugar_1(self):
-    # #button2 = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//span[contains(text(),'Для детей')]")))
-    #     button3 = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//label[@for='87435']")))
-    #     #button2.location_once_scrolled_into_view()
-    #     #button3.click()
-    #     time.sleep(3)
-    #     #print("нажали на фильтр без сахара")
-
-    def filter_ccal_active(self):
-        #driver = webdriver.Chrome()
-        ccal = ActionChains(driver)
-        filter_ccal_slider = driver.find_element(By.XPATH, "//*[@id='prices']/div/div/div[2]/div[5]")
+    # def filter_ccal_active(self):
+    #
+    #     ccal = ActionChains(driver)
+    #     filter_ccal_slider = driver.find_element(By.XPATH, "//*[@id='prices']/div/div/div[2]/div[5]")
 
         #ccal.click_and_hold(self.slider_ccal_find()).move_by_offset(10, 0).release().perform()
-        ccal.drag_and_drop_by_offset(filter_ccal_slider, 50, 0).perform()
-
-        time.sleep(3)
-        #ccal.click_and_hold(piano_thumb).move_by_offset(-200, 0).release().perform()
-
-
-
+        #ccal.drag_and_drop_by_offset(filter_ccal_slider, 50, 0).perform()
 
 
     #Actions - действия
@@ -130,6 +114,16 @@ class Items_page(Base):
         print("Нажали на кнопку Все фильтры")
         time.sleep(3)
 
+    def no_sugar_filter_click(self):
+        self.filter_no_sugar().click()
+        print("Нажали на кнопку Без сахара")
+        time.sleep(3)
+
+    def filter_show_click(self):
+        self.filter_show().click()
+        print("Нажали на кнопку Показать ... товаров ")
+        time.sleep(3)
+
     #Metods - методы, что делаем
 
     def products(self):
@@ -138,12 +132,13 @@ class Items_page(Base):
         self.filter_cheap_click()
         self.filter_expensive_click()
         #self.all_sections_find()
-        #self.filter_hits_click()
+        self.filter_hits_click()
         self.all_sections_find()
         self.close_modal_click()
         self.all_filter_click()
-       # self.filter_no_sugar_1()
-        self.filter_ccal_active()
+        self.no_sugar_filter_click()
+        self.filter_show_click()
+
 
 
 
