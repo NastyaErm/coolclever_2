@@ -26,7 +26,7 @@ class Items_page(Base):
     close_modal_btn = ".GiftBanner_controls__wk_NU button:nth-child(2)"
     filter_all_btn = "//span[contains(text(),'Все фильтры')]"
     filter_all_modal_window = "//div[@class='ModalFilter_formWarpper__aYwiJ']"
-    filter_no_sugar_btn = "//label[@for='87442']" #фильтр без сахара
+    filter_italia_btn = "//label[@for='873380']" #фильтр италия
     filter_show_items = "/html/body/div[4]/div/div[2]/div[3]/button[1]" #показать отфильтрованные товары
 
     #Getters
@@ -59,9 +59,9 @@ class Items_page(Base):
         return WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, self.filter_all_btn)))
 
-    def filter_no_sugar(self):
+    def filter_italia(self):
         return WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.filter_no_sugar_btn)))
+            EC.element_to_be_clickable((By.XPATH, self.filter_italia_btn)))
 
     def filter_show(self):
         return WebDriverWait(self.driver, 10).until(
@@ -72,9 +72,9 @@ class Items_page(Base):
     #
     #     ccal = ActionChains(driver)
     #     filter_ccal_slider = driver.find_element(By.XPATH, "//*[@id='prices']/div/div/div[2]/div[5]")
-
-        #ccal.click_and_hold(self.slider_ccal_find()).move_by_offset(10, 0).release().perform()
-        #ccal.drag_and_drop_by_offset(filter_ccal_slider, 50, 0).perform()
+    #
+    #     ccal.click_and_hold(self.slider_ccal_find()).move_by_offset(10, 0).release().perform()
+    #     ccal.drag_and_drop_by_offset(filter_ccal_slider, 50, 0).perform()
 
 
     #Actions - действия
@@ -114,8 +114,8 @@ class Items_page(Base):
         print("Нажали на кнопку Все фильтры")
         time.sleep(3)
 
-    def no_sugar_filter_click(self):
-        self.filter_no_sugar().click()
+    def italia_filter_click(self):
+        self.filter_italia().click()
         print("Нажали на кнопку Без сахара")
         time.sleep(3)
 
@@ -136,7 +136,7 @@ class Items_page(Base):
         self.all_sections_find()
         self.close_modal_click()
         self.all_filter_click()
-        self.no_sugar_filter_click()
+        self.italia_filter_click()
         self.filter_show_click()
 
 

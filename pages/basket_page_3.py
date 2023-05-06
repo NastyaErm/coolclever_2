@@ -21,12 +21,16 @@ class Basket_page(Base):
     basket_btn = "//div[@class='HeaderToolBar_basket__EvY2T']" #кнопка корзины
     empty_basket_text = "//p[contains(text(),'В вашей корзине пока пусто')]"
     clear_basket_btn = "//span[contains(text(),'Очистить корзину')]"
+    clear_basket_modal_btn = ".Button_button__PhnfR.Button_green__Qg_7J.false.Modal_button__SWT9i" #кнопка очистить на модалке
     go_to_catalog_btn = "#__next > main > div > div > div > div.BasketEmptyView_buttonWrapper__uZe3m > a > div"
 
     #Getters
 
     def button_basket(self):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.basket_btn)))
+
+    def clear_basket_modal(self):
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.clear_basket_modal_btn)))
 
 
     #Actions - действия
@@ -48,6 +52,7 @@ class Basket_page(Base):
         return WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, self.clear_basket_btn)))
     def full_basket_clear(self):
         self.full_basket().click()
+        self.clear_basket_modal().click()
         print("полная корзина очищена")
 
     def go_to_catalog(self):
@@ -59,11 +64,12 @@ class Basket_page(Base):
     def clear_basket(self): #очищаем полную корзину
         try:
             if self.empty_basket_1():
-                self.go_to_catalog()
+                #self.go_to_catalog()
                 self.go_to_catalog_click()
                 time.sleep(5)
         except TimeoutException:
             self.full_basket_clear()
+            self.go_to_catalog_click()
 
 
     #Metods - методы, что делаем
@@ -73,5 +79,6 @@ class Basket_page(Base):
         self.button_basket_click()
         self.assert_url_basket("https://www.coolclever.ru/basket")
         self.clear_basket()
+
 
 
