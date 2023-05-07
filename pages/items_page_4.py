@@ -28,6 +28,7 @@ class Items_page(Base):
     filter_all_modal_window = "//div[@class='ModalFilter_formWarpper__aYwiJ']"
     filter_italia_btn = "//label[@for='873380']" #фильтр италия
     filter_show_items = "/html/body/div[4]/div/div[2]/div[3]/button[1]" #показать отфильтрованные товары
+    filter_products_short = ".ShopLayout_sectionContent__ImaK5 .CatalogPage_productList__BC7TO"
 
     #Getters
 
@@ -66,6 +67,10 @@ class Items_page(Base):
     def filter_show(self):
         return WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, self.filter_show_items)))
+
+    def filter_products_short_check(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.filter_products_short)))
 
 
     # def filter_ccal_active(self):
@@ -124,6 +129,10 @@ class Items_page(Base):
         print("Нажали на кнопку Показать ... товаров ")
         time.sleep(3)
 
+    def filter_products_short_find(self):
+        self.filter_products_short_check()
+        print("Короткие карточки отфильтрованных товаров пришли")
+
     #Metods - методы, что делаем
 
     def products(self):
@@ -131,13 +140,13 @@ class Items_page(Base):
         self.all_sections_find()
         self.filter_cheap_click()
         self.filter_expensive_click()
-        #self.all_sections_find()
         self.filter_hits_click()
         self.all_sections_find()
         self.close_modal_click()
         self.all_filter_click()
         self.italia_filter_click()
         self.filter_show_click()
+        self.filter_products_short_find()
 
 
 

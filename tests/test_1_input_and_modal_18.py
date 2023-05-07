@@ -31,18 +31,18 @@ def test_login_page():
     # for cookie in pickle.load(open("cookies_01.pkl", "rb")):
     #     driver.add_cookie(cookie)
     # time.sleep(5)
-    # drivers.get("https://www.coolclever.ru/")
-    # time.sleep(7)
+    # driver.get("https://www.coolclever.ru/")
+    # time.sleep(5)
 
     cp = Catalog_page(driver)
     cp.catalog()
 
-    bp = Basket_page(driver)
-    bp.empty_basket()
+    # bp = Basket_page(driver)
+    # bp.empty_basket()
 
     ip = Items_page(driver)
     ip.products()
-    driver.quit()
+    #driver.quit()
 
 
 
